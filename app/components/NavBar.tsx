@@ -4,7 +4,7 @@ import ThemeSwitcher from "./ThemeSwitcher";
 
 const Navbar = () => {
   return (
-    <nav className="w-full bg-gray-200 dark:bg-gray-800 p-4 flex justify-between items-center">
+    <nav className="w-full bg-gray-200 dark:bg-gray-800 p-4 flex justify-between items-center opacity-60">
       <div className="text-2xl font-bold text-gray-900 dark:text-white">
         DSA 450 Questions
       </div>
