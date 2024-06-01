@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { BackgroundGradientAnimation } from "./components/ui/background-gradient-animation";
 import Navbar from "./components/NavBar";
+import { BackgroundBeams } from "./components/ui/background-beams";
+import { BackgroundGradientAnimation } from "./components/ui/background-gradient-animation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} bg-white dark:bg-gray-900 transition-colors`}
-      >
+      <body className={`${inter.className} transition-colors`}>
         <BackgroundGradientAnimation>
           <main className="absolute z-50 inset-0 flex items-center justify-center">
             <div className="max-h-screen overflow-y-auto w-full">
@@ -29,6 +28,7 @@ export default function RootLayout({
             </div>
           </main>
         </BackgroundGradientAnimation>
+        <BackgroundBeams />
       </body>
     </html>
   );

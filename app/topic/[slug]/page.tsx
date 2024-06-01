@@ -1,54 +1,51 @@
-"use client";
+import { HoverEffect } from "@/app/components/ui/card-hover-effect";
+import React from "react";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+export const projects = [
+  {
+    title: "Stripe",
+    description:
+      "A technology company that builds economic infrastructure for the internet.",
+    link: "https://stripe.com",
+  },
+  {
+    title: "Netflix",
+    description:
+      "A streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices.",
+    link: "https://netflix.com",
+  },
+  {
+    title: "Google",
+    description:
+      "A multinational technology company that specializes in Internet-related services and products.",
+    link: "https://google.com",
+  },
+  {
+    title: "Meta",
+    description:
+      "A technology company that focuses on building products that advance Facebook's mission of bringing the world closer together.",
+    link: "https://meta.com",
+  },
+  {
+    title: "Amazon",
+    description:
+      "A multinational technology company focusing on e-commerce, cloud computing, digital streaming, and artificial intelligence.",
+    link: "https://amazon.com",
+  },
+  {
+    title: "Microsoft",
+    description:
+      "A multinational technology company that develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services.",
+    link: "https://microsoft.com",
+  },
+];
 
-interface Post {
-  title: string;
-  content: string;
-}
-
-const PostPage: React.FC = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const slug = searchParams.get("slug");
-  const [post, setPost] = useState<Post | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (slug) {
-      console.log(slug);
-      const fetchPost = async () => {
-        setLoading(true);
-        try {
-          const response = await fetch(`https://example.com/api/posts/${slug}`);
-          const data = await response.json();
-          setPost(data);
-        } catch (error) {
-          console.error("Error fetching post:", error);
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      fetchPost();
-    }
-  }, [slug]);
-
-  if (loading) {
-    return <div>Loading...12 {searchParams.get("slug")}</div>;
-  }
-
-  if (!post) {
-    return <div>Post not found</div>;
-  }
-
+const page = () => {
   return (
-    <div>
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
+    <div className="max-w-5xl mx-auto px-8">
+      <HoverEffect items={projects} />
     </div>
   );
 };
 
-export default PostPage;
+export default page;
