@@ -1,15 +1,38 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TopicCard from "../Cards/Topic-Card";
-import data from "../../data/450DSA";
 import { BentoGrid, BentoGridItem } from "../ui/bento-grid";
+import { getAllTopics } from "@/app/controller/DSADataController";
+import { Topic } from "@/app/data/450DSA";
 
 const TopicCardBentGrid = () => {
-  const topics = data;
+  const [topics, setTopics] = useState<Topic[]>([]);
+
+  // Function to convert string to URL-friendly format
+  const convertStringToUrl = (input: string): string => {
+    let lowerCaseString = input.toLowerCase();
+    let replacedString = lowerCaseString.replace(/&/g, "and");
+    replacedString = replacedString.replace(/\s+/g, "-");
+    return replacedString;
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedTopics = await getAllTopics();
+        console.log(fetchedTopics);
+        setTopics(fetchedTopics);
+      } catch (error) {
+        console.error("Error fetching topics:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div>
-      <BentoGrid className="max-w-6xl mx-auto ">
+      <BentoGrid className="max-w-6xl mx-auto">
         {topics.map((topic, i) => (
           <BentoGridItem
             key={topic.topicName}
@@ -21,7 +44,7 @@ const TopicCardBentGrid = () => {
                 heading={topic.topicName}
                 totalQuestions={topic.questions.length}
                 completedQuestions={topic.doneQuestions}
-                linkUrl={"topic/" + topic.topicName}
+                linkUrl={"topic/" + convertStringToUrl(topic.topicName)}
               />
             }
           />
@@ -30,4 +53,5 @@ const TopicCardBentGrid = () => {
     </div>
   );
 };
+
 export default TopicCardBentGrid;

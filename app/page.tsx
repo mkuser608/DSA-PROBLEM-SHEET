@@ -8,6 +8,7 @@ const HomePage = () => {
   return (
     <div>
       <TopicCardBentGrid />
+      <div>Hello</div>
     </div>
   );
 };

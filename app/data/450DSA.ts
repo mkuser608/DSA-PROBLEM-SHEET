@@ -7,7 +7,7 @@ interface Question {
   URLs: string[]; // Change to array of strings for URLss
 }
 
-interface Topic {
+export interface Topic {
   topicName: string;
   position: number;
   started: boolean;
@@ -15,7 +15,7 @@ interface Topic {
   questions: Question[];
 }
 
-const data: Topic[] = [
+const QuestionData: Topic[] = [
   {
     topicName: "Array",
     position: 0,
@@ -5066,4 +5066,6 @@ const data: Topic[] = [
   },
 ];
 
-export default data;
+export default QuestionData;
+
+export const version = 100000029;
