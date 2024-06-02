@@ -75,3 +75,36 @@ export function importDBData(data: Topic[], callback: (data: Top[]) => void) {
     });
   });
 }
+
+interface FilterCriteria {
+  topicName?: string;
+  done?: boolean;
+  bookmark?: boolean;
+}
+
+export async function getFilteredData(
+  filters: FilterCriteria
+): Promise<Topic[]> {
+  const allTopics: Topic[] = await db
+    .collection("450dsaArchive")
+    .get<Topic[]>();
+  return allTopics.filter((topic) => {
+    return (
+      (!filters.topicName ||
+        convertStringToUrl(topic.topicName).includes(filters.topicName)) &&
+      topic.questions.some(
+        (question) =>
+          (filters.done === undefined || question.Done === filters.done) &&
+          (filters.bookmark === undefined ||
+            question.Bookmark === filters.bookmark)
+      )
+    );
+  });
+}
+
+const convertStringToUrl = (input: string): string => {
+  let lowerCaseString = input.toLowerCase();
+  let replacedString = lowerCaseString.replace(/&/g, "and");
+  replacedString = replacedString.replace(/\s+/g, "-");
+  return replacedString;
+};
