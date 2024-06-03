@@ -24,7 +24,7 @@ export default function RootLayout({
           <main className="absolute z-50 inset-0 flex items-center justify-center">
             <div className="max-h-screen overflow-y-auto w-full">
               <Navbar />
-              {children}
+              <div className="pt-20">{children}</div>
             </div>
           </main>
         </BackgroundGradientAnimation>

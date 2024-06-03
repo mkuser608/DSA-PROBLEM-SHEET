@@ -32,7 +32,7 @@ const TopicCardBentGrid = () => {
 
   return (
     <div>
-      <BentoGrid className="max-w-6xl mx-auto">
+      <BentoGrid className="max-w-screen-2xl mx-auto">
         {topics.map((topic, i) => (
           <BentoGridItem
             key={topic.topicName}

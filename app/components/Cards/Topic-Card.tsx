@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
-import { CardBody, CardContainer, CardItem } from "../ui/3d-card";
+import { EvervaultCard, Icon } from "../ui/evervault-card";
 import Link from "next/link";
 
 // Define the props interface
@@ -21,36 +21,17 @@ const TopicCard = ({
 }: CardProps) => {
   return (
     <Link href={linkUrl} passHref>
-      <CardContainer className="inter-var">
-        <CardBody className=" relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] bg-gray-100 bg-opacity-20 dark:bg-black dark:bg-opacity-20 dark:border-white/[0.2] dark:border-opacity-20  border-black/[0.1] w-auto sm:w-[16rem] h-auto rounded-xl p-6 border ">
-          <CardItem
-            translateZ="50"
-            className=" font-sans font-bold text-neutral-100 dark:text-neutral-300 mb-2 mt-2"
-          >
-            {heading}
-          </CardItem>
+      <div className="border border-black/[0.2] dark:border-white/[0.2] flex flex-col rounded-xl items-start max-w-sm mx-auto p-4 relative h-[30rem]">
+        <EvervaultCard text={heading} />
 
-          <CardItem
-            translateZ="100"
-            className="w-full mt-4 bg-slate-400/30 dark:bg-slate-500/30 backdrop-blur-md rounded-3xl min-h-40 p-4"
-          >
-            <CardItem
-              as="p"
-              translateZ="60"
-              className="text-neutral-300 text-sm pt-6 dark:text-neutral-300"
-            >
-              Total Questions: {totalQuestions}
-            </CardItem>
-            <CardItem
-              as="p"
-              translateZ="60"
-              className="text-neutral-300 text-sm pt-6 dark:text-neutral-300"
-            >
-              Completed Questions: {completedQuestions}
-            </CardItem>
-          </CardItem>
-        </CardBody>
-      </CardContainer>
+        <h2 className="dark:text-white text-black mt-4 text-sm font-light">
+          Hover over this card to reveal an awesome effect. Running out of copy
+          here.
+        </h2>
+        <p className="text-sm border font-light dark:border-white/[0.1] border-black/[0.1] rounded-full mt-4 text-black dark:text-white px-2 py-0.5">
+          Watch me hover
+        </p>
+      </div>
     </Link>
   );
 };

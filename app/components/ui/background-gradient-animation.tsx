@@ -3,8 +3,8 @@ import { cn } from "../../utils/cn";
 import { useEffect, useRef, useState } from "react";
 
 export const BackgroundGradientAnimation = ({
-  gradientBackgroundStart = "rgb(48, 44, 152, 1)",
-  gradientBackgroundEnd = "rgb(87, 68, 239, 1)",
+  gradientBackgroundStart = "rgb(27,44,45)",
+  gradientBackgroundEnd = "rgb(143,249,255)",
   firstColor = "18, 113, 255",
   secondColor = "221, 74, 255",
   thirdColor = "100, 220, 255",
