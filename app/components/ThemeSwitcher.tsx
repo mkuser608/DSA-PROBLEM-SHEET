@@ -1,33 +1,11 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 
 const ThemeSwitcher = () => {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-
-  useEffect(() => {
-    if (
-      localStorage.getItem("theme") === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      document.documentElement.classList.add("dark");
-      setTheme("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      setTheme("light");
-    }
-  }, []);
+  const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
-    if (theme === "dark") {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-      setTheme("light");
-    } else {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-      setTheme("dark");
-    }
+    setTheme(theme === "light" ? "dark" : "light");
   };
 
   return (

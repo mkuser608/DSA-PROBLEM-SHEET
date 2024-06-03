@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./components/NavBar";
 import { BackgroundBeams } from "./components/ui/background-beams";
 import { BackgroundGradientAnimation } from "./components/ui/background-gradient-animation";
+import { ThemeProvider } from "next-themes";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,15 +21,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} transition-colors`}>
-        <BackgroundGradientAnimation>
-          <main className="absolute z-50 inset-0 flex items-center justify-center">
-            <div className="max-h-screen overflow-y-auto w-full">
-              <Navbar />
-              <div className="pt-20">{children}</div>
-            </div>
-          </main>
-        </BackgroundGradientAnimation>
-        <BackgroundBeams />
+        <ThemeProvider defaultTheme="light">
+          <BackgroundGradientAnimation>
+            <main className="absolute z-50 inset-0 flex items-center justify-center">
+              <div className="max-h-screen overflow-y-auto w-full">
+                <Navbar />
+                <div className="pt-20">{children}</div>
+              </div>
+            </main>
+          </BackgroundGradientAnimation>
+          <BackgroundBeams />
+        </ThemeProvider>
       </body>
     </html>
   );
