@@ -1,13 +1,13 @@
 "use client";
-import { useTheme } from "next-themes";
-import { cn } from "../../utils/cn";
+import { cn } from "@/app/utils/cn";
 import { useEffect, useRef, useState } from "react";
+import { useTheme } from "../context/ThemeContext";
 
 export const BackgroundGradientAnimation = ({
   gradientBackgroundStartLight = "rgb(27,44,45)",
   gradientBackgroundEndLight = "rgb(143,249,255)",
   gradientBackgroundStartDark = "rgb(143,249,255)",
-  gradientBackgroundEndDark = "rgb(27,44,45)",
+  gradientBackgroundEndDark = "rgb(143,249,255)",
   firstColor = "18, 113, 255",
   secondColor = "221, 74, 255",
   thirdColor = "100, 220, 255",
@@ -21,10 +21,10 @@ export const BackgroundGradientAnimation = ({
   interactive = true,
   containerClassName,
 }: {
-  gradientBackgroundStartLight?: string;
-  gradientBackgroundEndLight?: string;
-  gradientBackgroundStartDark?: string;
-  gradientBackgroundEndDark?: string;
+  gradientBackgroundStartLight: string;
+  gradientBackgroundEndLight: string;
+  gradientBackgroundStartDark: string;
+  gradientBackgroundEndDark: string;
   firstColor?: string;
   secondColor?: string;
   thirdColor?: string;
@@ -39,27 +39,23 @@ export const BackgroundGradientAnimation = ({
   containerClassName?: string;
 }) => {
   const interactiveRef = useRef<HTMLDivElement>(null);
-  const { resolvedTheme } = useTheme();
-  console.log(resolvedTheme);
+  const { theme } = useTheme();
+  console.log(theme);
   const [curX, setCurX] = useState(0);
   const [curY, setCurY] = useState(0);
   const [tgX, setTgX] = useState(0);
   const [tgY, setTgY] = useState(0);
-
   useEffect(() => {
-    const backgroundStart =
-      resolvedTheme === "light"
-        ? gradientBackgroundStartLight
-        : gradientBackgroundStartDark;
-    const backgroundEnd =
-      resolvedTheme === "light"
-        ? gradientBackgroundEndLight
-        : gradientBackgroundEndDark;
     document.body.style.setProperty(
       "--gradient-background-start",
-      backgroundStart
+      theme == "light"
+        ? gradientBackgroundStartDark
+        : gradientBackgroundStartLight
     );
-    document.body.style.setProperty("--gradient-background-end", backgroundEnd);
+    document.body.style.setProperty(
+      "--gradient-background-end",
+      theme == "light" ? gradientBackgroundEndDark : gradientBackgroundEndLight
+    );
     document.body.style.setProperty("--first-color", firstColor);
     document.body.style.setProperty("--second-color", secondColor);
     document.body.style.setProperty("--third-color", thirdColor);
@@ -68,7 +64,8 @@ export const BackgroundGradientAnimation = ({
     document.body.style.setProperty("--pointer-color", pointerColor);
     document.body.style.setProperty("--size", size);
     document.body.style.setProperty("--blending-value", blendingValue);
-  }, [resolvedTheme]);
+  }, [theme]);
+
   useEffect(() => {
     function move() {
       if (!interactiveRef.current) {
@@ -100,10 +97,7 @@ export const BackgroundGradientAnimation = ({
   return (
     <div
       className={cn(
-        "h-screen w-screen relative overflow-hidden top-0 left-0 bg-gradient-to-br",
-        resolvedTheme === "light"
-          ? "from-var(--gradient-background-start-dark) to-var(--gradient-background-end-dark)"
-          : "from-var(--gradient-background-start-light) to-var(--gradient-background-end-light)",
+        "h-screen w-screen relative overflow-hidden top-0 left-0 bg-[linear-gradient(40deg,var(--gradient-background-start),var(--gradient-background-end))]",
         containerClassName
       )}
     >
