@@ -21,15 +21,24 @@ const TopicCard = ({
 }: CardProps) => {
   return (
     <Link href={linkUrl} passHref>
-      <div className="border border-black/[0.2] dark:border-white/[0.2] flex flex-col rounded-xl items-start max-w-sm mx-auto p-4 relative h-[30rem]">
+      <div className="border border-black/[0.2] dark:border-white/[0.2] flex flex-col rounded-xl jus max-w-sm mx-auto p-4 relative h-[30rem]">
+        <div className="flex flex-row justify-between">
+          <div className="dark:text-white text-black text-sm font-semibold basis-1/2">
+            Total Questions: <span>{totalQuestions} </span>
+          </div>
+          <div className="text-sm border font-bold dark:border-white/[0.8] border-black/[0.8] rounded-full  text-black dark:text-white px-2 py-0.5">
+            {completedQuestions == 0
+              ? "Start Now"
+              : totalQuestions > completedQuestions
+              ? "Solve Now"
+              : "Done"}
+          </div>
+        </div>
+
         <EvervaultCard text={heading} />
 
-        <h2 className="dark:text-white text-black mt-4 text-sm font-light">
-          Hover over this card to reveal an awesome effect. Running out of copy
-          here.
-        </h2>
-        <p className="text-sm border font-light dark:border-white/[0.1] border-black/[0.1] rounded-full mt-4 text-black dark:text-white px-2 py-0.5">
-          Watch me hover
+        <p className="dark:text-white text-black mt-4 text-sm font-semibold">
+          Completed Questions: {completedQuestions}
         </p>
       </div>
     </Link>
